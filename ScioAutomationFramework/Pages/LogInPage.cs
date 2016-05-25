@@ -1,6 +1,6 @@
-ï»¿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="LogInPage.cs" company="Scio Consulting">
-//   Copyright Â©  Scio Consulting. Todos los derechos estan reservados.
+//   Copyright ©  Scio Consulting. Todos los derechos estan reservados.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -8,11 +8,14 @@ namespace ScioAutomationFramework.Pages
 {
     #region
 
+    using System;
+    using System.Windows.Forms;
+
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.PageObjects;
 
+    using ScioAutomationFramework.Config;
     using ScioAutomationFramework.Extenciones;
-    using ScioAutomationFramework.Pages;
 
     #endregion
 
@@ -20,7 +23,7 @@ namespace ScioAutomationFramework.Pages
     public class LogInPage : Pages
     {
         /// <summary>The username.</summary>
-        [FindsBy(How = How.Id, Using = "Username")]
+        [FindsBy(How = How.LinkText, Using = "Crea una página")]
         private IWebElement username;
 
         /// <summary>The password.</summary>
@@ -40,9 +43,11 @@ namespace ScioAutomationFramework.Pages
         /// <summary>The log in.</summary>
         public void LogIn()
         {
-            Extentions.sendKeys(username, "user");
-            Extentions.sendKeys(password, "password123");
-            btnLogIn.Click();
+            var xpath = Extentions.GetElementXPath(this.username, BrowserConfig.webDriver);
+
+            MessageBox.Show(xpath,"The XPath");
+
+            Extentions.sendKeys(this.username, "fredyarroniz@hotmail.com");
         }
     }
 }

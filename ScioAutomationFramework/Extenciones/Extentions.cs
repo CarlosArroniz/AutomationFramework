@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Extentions.cs" company="Scio Consulting">
-//   Copyright ©  Scio Consulting. Todos los derechos estan reservados.
+//   Copyright �  Scio Consulting. Todos los derechos estan reservados.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -13,6 +13,7 @@ namespace ScioAutomationFramework.Extenciones
     using System.Reflection;
 
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Internal;
     using OpenQA.Selenium.Support.UI;
 
     using Enum = ScioAutomationFramework.Enums.Enum;
@@ -196,6 +197,77 @@ namespace ScioAutomationFramework.Extenciones
                     jse.ExecuteScript("window.scrollBy(-'" + scrollPx + "',0)", string.Empty);
                     break;
             }
+        }
+
+        /// <summary>The set attribute.</summary>
+        /// <param name="element">The element.</param>
+        /// <param name="attributeName">The attribute name.</param>
+        /// <param name="value">The value.</param>
+        public static void SetAttribute(IWebElement element, string attributeName, string value)
+        {
+            var wrappedElement = (IWrapsDriver)element;
+
+            var driver = (IJavaScriptExecutor)wrappedElement;
+
+            driver.ExecuteScript("arguments[0].setAttribute(arguments[1],arguments[2])", element);
+
+            var obj = new object();
+        }
+
+        /// <summary>The get absolute x path.</summary>
+        /// <param name="element">The element.</param>
+        /// <param name="driver">The driver.</param>
+        /// <returns>The <see cref="string"/>.</returns>
+        public static string GetElementXPath(IWebElement element, IWebDriver driver)
+        {
+            return (string)((IJavaScriptExecutor)driver).ExecuteScript(
+            "getXPath=function(node)" +
+            "{" +
+                "if (node.id !== '')" +
+                "{" +
+                    "return '//' + node.tagName.toLowerCase() + '[@id=\"'+node.id+'\"]'" +
+                "}" +
+
+                "if (node === document.body)" +
+                "{" +
+                    "return node.tagName.toLowerCase()" +
+                "}" +
+
+                "var nodeCount = 0;" +
+                "var childNodes = node.parentNode.childNodes;" +
+
+                "for (var i=0; i<childNodes.length; i++)" +
+                "{" +
+                    "var currentNode = childNodes[i];" +
+
+                    "if (currentNode === node)" +
+                    "{" +
+                        "return getXPath(node.parentNode) + '/' + node.tagName.toLowerCase() + '[' + (nodeCount + 1) + ']'" +
+        
+                    "}" +
+
+                    "if (currentNode.nodeType === 1 && " +
+                        "currentNode.tagName.toLowerCase() === node.tagName.toLowerCase())" +
+                    "{" +
+                        "nodeCount++" +
+                    "}" +
+                "}" +
+            "};" + "return getXPath(arguments[0]);",
+                element);
+        }
+
+        /// <summary>The get elements id.</summary>
+        /// <param name="driver">The driver.</param>
+        /// <param name="elementParent">The element parent.</param>
+        /// <param name="pageUrl">The page url.</param>
+        /// <returns>The <see cref="string[]"/>.</returns>
+        public string[] GetElementsId(IWebDriver driver, IWebElement elementParent, string pageUrl)
+        {
+            driver.Navigate().GoToUrl(pageUrl);
+
+            var elements = driver.FindElements(By.XPath(string.Empty));
+
+            return new[] { string.Empty };
         }
     }
 }

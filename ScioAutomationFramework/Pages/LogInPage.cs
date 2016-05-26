@@ -12,10 +12,12 @@ namespace ScioAutomationFramework.Pages
     using System.Windows.Forms;
 
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.Extensions;
     using OpenQA.Selenium.Support.PageObjects;
 
-    using ScioAutomationFramework.Config;
     using ScioAutomationFramework.Extenciones;
+
+    using static ScioAutomationFramework.Config.BrowserConfig;
 
     #endregion
 
@@ -23,7 +25,7 @@ namespace ScioAutomationFramework.Pages
     public class LogInPage : Pages
     {
         /// <summary>The username.</summary>
-        [FindsBy(How = How.LinkText, Using = "login-full-wrapper")]
+        [FindsBy(How = How.ClassName, Using = "btn")]
         private IWebElement username;
 
         /// <summary>The password.</summary>
@@ -39,12 +41,16 @@ namespace ScioAutomationFramework.Pages
         /// <summary>The log in.</summary>
         public void LogIn()
         {
-            var xpath = Extentions.GetElementXPath(this.username, BrowserConfig.webDriver);
+            var xpath = Extentions.GetElementXPath(this.username, webDriver);
+
             MessageBox.Show(xpath, "The XPath");
             //Extentions.sendKeys(username, "fredyarroniz@hotmail.com");
 
+            //var attribute = this.username.GetAttribute("tagname");
 
-            IList<IWebElement> allFromChild = BrowserConfig.webDriver.FindElements(By.XPath(xpath + "/*"));
+            var asd = Extentions.getAbsoluteXPath(username);
+
+            IList<IWebElement> allFromChild = webDriver.FindElements(By.XPath(xpath + "/*"));
             
             MessageBox.Show(allFromChild.Count.ToString(), "The XPath");
 

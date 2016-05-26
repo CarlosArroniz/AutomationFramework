@@ -27,9 +27,8 @@ namespace ScioAutomationFramework.Tests
         public void LogIn()
         {
             Pages.LogInPage.Goto();
-            Extentions.WaitFor(BrowserConfig.webDriver, By.Id("username"), 30);
+            Extentions.WaitFor(BrowserConfig.webDriver, By.Id("login-full-wrapper"), 30);
             Pages.LogInPage.LogIn();
-            Extentions.WaitFor(BrowserConfig.webDriver, By.Id("mainMenu"), 30);
         }
     }
 }

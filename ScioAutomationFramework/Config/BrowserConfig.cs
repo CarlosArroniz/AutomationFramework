@@ -143,15 +143,15 @@ namespace ScioAutomationFramework.Config
                     webDriver.Manage().Window.Maximize();
                     break;
 
-                case BrowConfig.opera:
-                    webDriver = new OperaDriver();
-                    webDriver.Manage().Window.Maximize();
-                    break;
+                //case BrowConfig.opera:
+                //    webDriver = new OperaDriver();
+                //    webDriver.Manage().Window.Maximize();
+                //    break;
 
-                case BrowConfig.safari:
-                    webDriver = new SafariDriver();
-                    webDriver.Manage().Window.Maximize();
-                    break;
+                //case BrowConfig.safari:
+                //    webDriver = new SafariDriver();
+                //    webDriver.Manage().Window.Maximize();
+                //    break;
             }
         }
 

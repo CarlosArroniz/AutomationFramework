@@ -29,7 +29,7 @@ namespace ScioAutomationFramework.Tests
         [TestInitialize]
         public void TestSetup()
         {
-            BrowserConfig.browser = BrowserConfig.BrowConfig.opera;
+            BrowserConfig.browser = BrowserConfig.BrowConfig.ie;
             BrowserConfig.environment = BrowserConfig.Environment.qa;
             BrowserConfig.Init();
         }

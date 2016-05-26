@@ -18,7 +18,7 @@ namespace ScioAutomationFramework.Pages
         /// <summary>The log in page.</summary>
         public void LogInPage()
         {
-            BrowserConfig.Goto("Put your URL Here!");
+            BrowserConfig.Goto("http://cotemaractivosqa.scio.local/");
         }
     }
 }

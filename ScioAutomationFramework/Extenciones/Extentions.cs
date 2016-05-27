@@ -41,7 +41,7 @@ namespace ScioAutomationFramework.Extenciones
         /// <summary>The element exists.</summary>
         /// <param name="driver">The driver.</param>
         /// <param name="by">The by.</param>
-        /// <returns>The <see cref="bool" />.</returns>
+        /// <returns>The <see cref="bool"/>.</returns>
         public static bool ElementExists(IWebDriver driver, By by)
         {
             try
@@ -58,7 +58,7 @@ namespace ScioAutomationFramework.Extenciones
 
         /// <summary>The read file.</summary>
         /// <param name="fileName">The file name.</param>
-        /// <returns>The <see cref="string[]" />.</returns>
+        /// <returns>The <see cref="string[]"/>.</returns>
         public static string[] ReadFile(string fileName)
         {
             var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -122,7 +122,7 @@ namespace ScioAutomationFramework.Extenciones
         /// <param name="driver">The driver.</param>
         /// <param name="by">The by.</param>
         /// <param name="timeOut">The time out.</param>
-        /// <returns>The <see cref="IWebElement" />.</returns>
+        /// <returns>The <see cref="IWebElement"/>.</returns>
         public static IWebElement WaitFor(IWebDriver driver, By by, int timeOut)
         {
             var retriesNumber = timeOut / 10;
@@ -219,7 +219,7 @@ namespace ScioAutomationFramework.Extenciones
         /// <summary>The get absolute x path.</summary>
         /// <param name="element">The element.</param>
         /// <param name="driver">The driver.</param>
-        /// <returns>The <see cref="string" />.</returns>
+        /// <returns>The <see cref="string"/>.</returns>
         public static string GetElementXPath(IWebElement element, IWebDriver driver)
         {
             return
@@ -234,10 +234,13 @@ namespace ScioAutomationFramework.Extenciones
                     + "return getXPath(node.parentNode) + '/' + node.tagName.toLowerCase() + '[' + (nodeCount + 1) + ']'"
                     + "}" + "if (currentNode.nodeType === 1 && "
                     + "currentNode.tagName.toLowerCase() === node.tagName.toLowerCase())" + "{" + "nodeCount++" + "}"
-                    + "}" + "};" + "return getXPath(arguments[0]);",
+                    + "}" + "};" + "return getXPath(arguments[0]);", 
                     element);
         }
 
+        /// <summary>The get absolute x path.</summary>
+        /// <param name="element">The element.</param>
+        /// <returns>The <see cref="string"/>.</returns>
         public static string getAbsoluteXPath(IWebElement element)
         {
             return
@@ -259,15 +262,27 @@ namespace ScioAutomationFramework.Extenciones
                     + "for (var i = comps.length - 1; i >= 0; i--) {" + "comp = comps[i];"
                     + "xpath += '/' + comp.name.toLowerCase();" + "if (comp.position !== null) {"
                     + "xpath += '[' + comp.position + ']';" + "}" + "}" + "return xpath;"
-                    + "} return absoluteXPath(arguments[0]);",
+                    + "} return absoluteXPath(arguments[0]);", 
                     element);
+        }
+
+        /// <summary>The get all i ds.</summary>
+        /// <returns>The <see cref="string[]"/>.</returns>
+        public static string[] getAllIDs()
+        {
+            return
+                (string[])
+                ((IJavaScriptExecutor)BrowserConfig.webDriver).ExecuteScript(
+                    "var allElements = document.getElementsByTagName('*');" + "var allIds = [];"
+                    + "for (var i = 0, n = allElements.length; i < n; ++i) {" + "var el = allElements[i];"
+                    + "if(el.id) { allIds.push(el.id) } }");
         }
 
         /// <summary>The get elements id.</summary>
         /// <param name="driver">The driver.</param>
         /// <param name="elementParent">The element parent.</param>
         /// <param name="pageUrl">The page url.</param>
-        /// <returns>The <see cref="string[]" />.</returns>
+        /// <returns>The <see cref="string[]"/>.</returns>
         public static string[] GetElementsId(IWebDriver driver, IWebElement elementParent, string pageUrl)
         {
             driver.Navigate().GoToUrl(pageUrl);

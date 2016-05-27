@@ -8,17 +8,15 @@ namespace ScioAutomationFramework.Pages
 {
     #region
 
-    using System.Collections.Generic;
+    using System;
     using System.Linq;
     using System.Windows.Forms;
 
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Support.Extensions;
     using OpenQA.Selenium.Support.PageObjects;
 
+    using ScioAutomationFramework.Config;
     using ScioAutomationFramework.Extenciones;
-
-    using static ScioAutomationFramework.Config.BrowserConfig;
 
     #endregion
 
@@ -42,27 +40,32 @@ namespace ScioAutomationFramework.Pages
         /// <summary>The log in.</summary>
         public void LogIn()
         {
-            var xpath = Extentions.GetElementXPath(this.username, webDriver);
+            var xpath = Extentions.GetElementXPath(this.username, BrowserConfig.webDriver);
 
-            MessageBox.Show(xpath, "The XPath");
-            //Extentions.sendKeys(username, "fredyarroniz@hotmail.com");
+            //MessageBox.Show(xpath, "The XPath");
 
-            //var attribute = this.username.GetAttribute("tagname");
-            
-            var asd = Extentions.getAbsoluteXPath(username);
+            //Extentions.sendKeys(this.username, "fredyarroniz@hotmail.com");
 
-            IList<IWebElement> allFromChild = webDriver.FindElements(By.XPath(asd + "/*"));
+            var attribute = this.username.GetAttribute("tagname");
 
-            var attrib =
-                (string)
-                ((IJavaScriptExecutor)webDriver).ExecuteScript(
-                    "return arguments[0].innerHTML;",
-                    allFromChild.ElementAt(0));
+            //var asd = Extentions.getAbsoluteXPath(this.username);
+
+            var allFromChild = BrowserConfig.webDriver.FindElements(By.TagName("input"));
+
+            var el = new string[allFromChild.Count];
+
+            for (var i = 0; i < allFromChild.Count; i++)
+            {
+                el[i] = allFromChild.ElementAt(i).GetAttribute("id");
+
+                Console.WriteLine(el[i]);
+            }
+
+            ClassGenerator.FilesGenerator(el, "MyPage");
 
             var ids = allFromChild.ElementAt(0).GetAttribute("id");
 
-            MessageBox.Show(allFromChild.Count.ToString(), "The XPath");
-
+            //MessageBox.Show(allFromChild.Count.ToString(), "The XPath");
         }
     }
 }

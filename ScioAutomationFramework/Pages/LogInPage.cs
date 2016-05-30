@@ -65,7 +65,7 @@ namespace ScioAutomationFramework.Pages
                 Console.WriteLine(el[i]);
             }
 
-            ClassGenerator.FilesGenerator(el, "MyPage");
+            ClassGenerator.FilesGenerator("MyPage", el);
 
             var ids = allFromChild.ElementAt(0).GetAttribute("id");
 

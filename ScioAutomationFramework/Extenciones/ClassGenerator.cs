@@ -18,15 +18,15 @@ namespace ScioAutomationFramework.Extenciones
     public class ClassGenerator
     {
         /// <summary>The files generator.</summary>
-        /// <param name="Elements">The elements.</param>
         /// <param name="name">The name.</param>
-        public static void FilesGenerator(string[] Elements, string name)
+        /// <param name="Elements">The elements.</param>
+        public static void FilesGenerator(string name, string[] Elements)
         {
             string[] usings =
                 {
-                    "using OpenQA.Selenium;", "using OpenQA.Selenium.Support.Extensions;",
-                    "using OpenQA.Selenium.Support.PageObjects;",
-                    "using ScioAutomationFramework.Extenciones;",
+                    "using OpenQA.Selenium;", "using OpenQA.Selenium.Support.Extensions;", 
+                    "using OpenQA.Selenium.Support.PageObjects;", 
+                    "using ScioAutomationFramework.Extenciones;", 
                     "using static ScioAutomationFramework.Config.BrowserConfig; "
                 };
 
@@ -41,7 +41,7 @@ namespace ScioAutomationFramework.Extenciones
             using (var sw = new StreamWriter(path + "Pages\\" + fileName))
             {
                 sw.WriteLine("namespace ScioAutomationFramwork.Pages");
-                sw.WriteLine("{");
+                sw.WriteLine("{\n");
                 sw.WriteLine("  #region\n");
                 foreach (var u in usings)
                 {
@@ -64,8 +64,8 @@ namespace ScioAutomationFramework.Extenciones
                 sw.WriteLine(Elements[1] + ".SendKeys(\"password\");");
                 sw.WriteLine("\n}");
 
-                sw.WriteLine("      }");//class ending
-                sw.WriteLine("  }");//namespace ending
+                sw.WriteLine("      }"); // class ending
+                sw.WriteLine("  }"); // namespace ending
             }
         }
     }

@@ -67,7 +67,6 @@
     <Compile Include="Extenciones\ClassGenerator.cs" />
     <Compile Include="Extenciones\Extentions.cs" />
     <Compile Include="Pages\LogInPage.cs" />
-    <Compile Include="Pages\MyPage.cs" />
     <Compile Include="Pages\NavigationPage.cs" />
     <Compile Include="Pages\Pages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

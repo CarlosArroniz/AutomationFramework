@@ -42,25 +42,30 @@ namespace ScioAutomationFramework.Extenciones
             {
                 sw.WriteLine("namespace ScioAutomationFramwork.Pages");
                 sw.WriteLine("{");
-                sw.WriteLine("#region");
+                sw.WriteLine("  #region\n");
                 foreach (var u in usings)
                 {
-                    sw.WriteLine(u);
+                    sw.WriteLine("      " + u + "\n");
                 }
 
-                sw.WriteLine("#endregion");
+                sw.WriteLine("  #endregion\n");
 
-                sw.WriteLine("public class " + name);
-                sw.WriteLine("{");
+                sw.WriteLine("  public class " + name);
+                sw.WriteLine("  {");
 
                 foreach (var e in Elements)
                 {
-                    sw.WriteLine("[FindsBy(How = How.Id, Using = \"" + e + "\")]");
-                    sw.WriteLine("private IWebElement " + e + ";");
+                    sw.WriteLine("          [FindsBy(How = How.Id, Using = \"" + e + "\")]");
+                    sw.WriteLine("          private static IWebElement " + e + ";" + "\n");
                 }
 
-                sw.WriteLine("}");//class ending
-                sw.WriteLine("}");//namespace ending
+                sw.WriteLine("public static void " + name + "Method()\n" + "{\n");
+                sw.WriteLine(Elements[0] + ".SendKeys(\"usuario1\");");
+                sw.WriteLine(Elements[1] + ".SendKeys(\"password\");");
+                sw.WriteLine("\n}");
+
+                sw.WriteLine("      }");//class ending
+                sw.WriteLine("  }");//namespace ending
             }
         }
     }

@@ -42,22 +42,26 @@ namespace ScioAutomationFramework.Pages
         {
             var xpath = Extentions.GetElementXPath(this.username, BrowserConfig.webDriver);
 
-            //MessageBox.Show(xpath, "The XPath");
+            // MessageBox.Show(xpath, "The XPath");
 
-            //Extentions.sendKeys(this.username, "fredyarroniz@hotmail.com");
-
+            // Extentions.sendKeys(this.username, "fredyarroniz@hotmail.com");
             var attribute = this.username.GetAttribute("tagname");
 
-            //var asd = Extentions.getAbsoluteXPath(this.username);
-
+            // var asd = Extentions.getAbsoluteXPath(this.username);
             var allFromChild = BrowserConfig.webDriver.FindElements(By.TagName("input"));
 
             var el = new string[allFromChild.Count];
 
             for (var i = 0; i < allFromChild.Count; i++)
             {
-                el[i] = allFromChild.ElementAt(i).GetAttribute("id");
-
+                if (allFromChild.ElementAt(i).GetAttribute("id").Equals(string.Empty))
+                {
+                    el[i] = allFromChild.ElementAt(i).GetAttribute("name");
+                }
+                else
+                {
+                    el[i] = allFromChild.ElementAt(i).GetAttribute("id");
+                }
                 Console.WriteLine(el[i]);
             }
 
@@ -65,7 +69,7 @@ namespace ScioAutomationFramework.Pages
 
             var ids = allFromChild.ElementAt(0).GetAttribute("id");
 
-            //MessageBox.Show(allFromChild.Count.ToString(), "The XPath");
+            // MessageBox.Show(allFromChild.Count.ToString(), "The XPath");
         }
     }
 }

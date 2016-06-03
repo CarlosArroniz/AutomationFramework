@@ -10,7 +10,6 @@ namespace ScioAutomationFramework.Pages
 
     using System;
     using System.Linq;
-    using System.Windows.Forms;
 
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.PageObjects;
@@ -40,14 +39,6 @@ namespace ScioAutomationFramework.Pages
         /// <summary>The log in.</summary>
         public void LogIn()
         {
-            var xpath = Extentions.GetElementXPath(this.username, BrowserConfig.webDriver);
-
-            // MessageBox.Show(xpath, "The XPath");
-
-            // Extentions.sendKeys(this.username, "fredyarroniz@hotmail.com");
-            var attribute = this.username.GetAttribute("tagname");
-
-            // var asd = Extentions.getAbsoluteXPath(this.username);
             var allFromChild = BrowserConfig.webDriver.FindElements(By.TagName("input"));
 
             var el = new string[allFromChild.Count];
@@ -62,14 +53,11 @@ namespace ScioAutomationFramework.Pages
                 {
                     el[i] = allFromChild.ElementAt(i).GetAttribute("id");
                 }
+
                 Console.WriteLine(el[i]);
             }
 
-            ClassGenerator.FilesGenerator("MyPage", el);
-
-            var ids = allFromChild.ElementAt(0).GetAttribute("id");
-
-            // MessageBox.Show(allFromChild.Count.ToString(), "The XPath");
+            ClassGenerator.FilesGenerator("FbPage", el);
         }
     }
 }

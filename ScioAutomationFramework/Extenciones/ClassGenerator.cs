@@ -60,8 +60,8 @@ namespace ScioAutomationFramework.Extenciones
                 }
 
                 sw.WriteLine("public static void " + name + "Method()\n" + "{\n");
-                sw.WriteLine(Elements[0] + ".SendKeys(\"usuario1\");");
-                sw.WriteLine(Elements[1] + ".SendKeys(\"password\");");
+                sw.WriteLine(Elements[0] + ".SendKeys(\"value1\");");
+                sw.WriteLine(Elements[1] + ".SendKeys(\"value2\");");
                 sw.WriteLine("\n}");
 
                 sw.WriteLine("      }"); // class ending

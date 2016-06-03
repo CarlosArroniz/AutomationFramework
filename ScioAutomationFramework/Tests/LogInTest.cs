@@ -8,6 +8,8 @@ namespace ScioAutomationFramework.Tests
 {
     #region
 
+    using System.Threading;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using OpenQA.Selenium;
@@ -26,9 +28,10 @@ namespace ScioAutomationFramework.Tests
         [TestMethod]
         public void LogIn()
         {
-            Pages.LogInPage.Goto();
-            Extentions.WaitFor(BrowserConfig.webDriver, By.Id("login-full-wrapper"), 30);
-            Pages.LogInPage.LogIn();
+            //Pages.LogInPage.Goto();
+            //Thread.Sleep(3000);
+            //Pages.LogInPage.LogIn();
+            ScriptsGenerator.ScriptGen();
         }
     }
 }

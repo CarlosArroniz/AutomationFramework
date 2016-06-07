@@ -18,6 +18,12 @@ namespace ScioAutomationFramework.Tests
     using ScioAutomationFramework.Extenciones;
     using ScioAutomationFramework.Pages;
 
+    using EnvDTE;
+
+    using EnvDTE80;
+
+    using Thread = System.Threading.Thread;
+
     #endregion
 
     /// <summary>The log in test.</summary>
@@ -28,10 +34,9 @@ namespace ScioAutomationFramework.Tests
         [TestMethod]
         public void LogIn()
         {
-            //Pages.LogInPage.Goto();
-            //Thread.Sleep(3000);
-            //Pages.LogInPage.LogIn();
-            ScriptsGenerator.ScriptGen();
+            Pages.LogInPage.Goto();
+            Thread.Sleep(3000);
+            Pages.LogInPage.LogIn();
         }
     }
 }

@@ -11,6 +11,10 @@ namespace ScioAutomationFramework.Pages
     using System;
     using System.Linq;
 
+    using EnvDTE;
+
+    using EnvDTE80;
+
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.PageObjects;
 
@@ -39,6 +43,9 @@ namespace ScioAutomationFramework.Pages
         /// <summary>The log in.</summary>
         public void LogIn()
         {
+
+
+
             var allFromChild = BrowserConfig.webDriver.FindElements(By.TagName("input"));
 
             var el = new string[allFromChild.Count];

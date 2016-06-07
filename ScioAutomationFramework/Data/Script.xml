@@ -5,12 +5,9 @@
     <Action>WriteOn</Action>
     <Value>sigaadmin</Value>
   </Element>
-
   <Element>
     <ElId>Password</ElId>
     <Action>WriteOn</Action>
     <Value>$Test1234</Value>
   </Element>
-  
 </Elements>
-

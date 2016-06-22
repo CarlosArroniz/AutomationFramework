@@ -2,12 +2,12 @@
 <Elements>
   <Element>
     <ElId>Email</ElId>
-    <Action>WriteOn</Action>
+    <Action>Write</Action>
     <Value>sigaadmin</Value>
   </Element>
   <Element>
     <ElId>Password</ElId>
-    <Action>WriteOn</Action>
+    <Action>Write</Action>
     <Value>$Test1234</Value>
   </Element>
 </Elements>
